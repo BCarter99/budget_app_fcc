@@ -23,7 +23,13 @@ class Category:
         return False
 
     def get_balance(self):
-        pass
+        '''
+        Adds all the deposits and withdrawals to find the total amount available for the given category
+        '''
+        total = 0
+        for item in self.ledger:
+            total += item['amount']
+        return total
 
     def transfer(self, amount, category):
         pass
