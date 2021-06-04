@@ -3,6 +3,16 @@ class Category:
         self.name = name
         self.ledger = list()
 
+    def __str__(self):
+        title = f'{self.name:*^30}\n'
+        items = ''
+        total = 0
+        for item in self.ledger:
+            items += f'{item["description"][0:23]:23}' + f'{item["amount"]:>7.2f}' + '\n'
+            total += item['amount']
+
+        output = title +
+
     def deposit(self, dep_amount, description=''):
         '''
         A method that accepts an amount and description. If no description is given, it defaults to an empty string.
