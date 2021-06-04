@@ -1,6 +1,6 @@
 class Category:
-    def __init__(self, category):
-        self.category = category
+    def __init__(self, name):
+        self.name = name
         self.ledger = list()
 
     def deposit(self, dep_amount, description=''):
@@ -32,7 +32,18 @@ class Category:
         return total
 
     def transfer(self, amount, category):
-        pass
+        '''
+        Accepts an amount and another budget category as arguments. Should add a withdrawal with the amount
+        and the description 'Transfer to [Destination Category]'. Then should add a deposit to the other category
+        with the amount and the description 'Transfer from [Source Category]'
+        If not enough funds, nothing is done to either ledger. Returns True if the transfer took place, False otherwise
+        '''
+        if self.check_funds(amount):
+            self.withdraw(amount, 'Transfer to [' + category.name + ']')
+            category.deposit(amount, 'Transfer from [' + self.name + ']')
+            return True
+        else:
+            return False
 
     def check_funds(self, amount):
         pass
