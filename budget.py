@@ -76,6 +76,8 @@ class Category:
         return total
 
 
+
+
 def truncate(n):
     multiplier = 10
     return int(n * multiplier) / multiplier
@@ -85,6 +87,7 @@ def get_totals(categories):
     breakdown = []
     for category in categories:
         total += category.get_withdrawals()
+        breakdown.append(category.get_withdrawals())
     rounded = list(map(lambda x: truncate(x/total), breakdown))
     return rounded
 
@@ -99,10 +102,10 @@ def create_spend_chart(categories):
     while i >= 0:
         cat_spaces = ' '
         for total in totals:
-            if total * 200 >= 1:
-                cat_spaces += 'o '
+            if total * 100 >= i:
+                cat_spaces += 'o  '
             else:
-                cat_spaces += ' '
+                cat_spaces += '   '
         res += str(i).rjust(3) + '|' + cat_spaces + ('\n')
         i -= 10
 
@@ -115,12 +118,12 @@ def create_spend_chart(categories):
     maxi = max(names, key=len)
 
     for x in range(len(maxi)):
-        nameStr = '    '
+        nameStr = '     '
         for name in names:
             if x >= len(name):
-                nameStr += '  '
+                nameStr += '   '
             else:
-                nameStr += name[x] +' '
+                nameStr += name[x] +'  '
 
         if(x != len(maxi) -1):
             nameStr += '\n'
