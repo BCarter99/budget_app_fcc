@@ -39,14 +39,21 @@ class Category:
         If not enough funds, nothing is done to either ledger. Returns True if the transfer took place, False otherwise
         '''
         if self.check_funds(amount):
-            self.withdraw(amount, 'Transfer to [' + category.name + ']')
-            category.deposit(amount, 'Transfer from [' + self.name + ']')
+            self.withdraw(amount, f'Transfer to {category.name}')
+            category.deposit(amount, f'Transfer from {self.name}')
             return True
         else:
             return False
 
     def check_funds(self, amount):
-        pass
+        '''
+        Method that accepts an amount as an argument. Returns False if the amount is greater than the balance of the
+        budget category, and True otherwise
+        '''
+        if self.get_balance() >= amount:
+            return True
+        else:
+            return False
 
 
 
